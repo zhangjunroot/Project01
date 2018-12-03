@@ -1,0 +1,7 @@
+jps -l
+jstat -gcutil 732 1000 10
+泛型知识需要学习总结
+集合排序需要学习总结
+
+
+select   * from   employees e join departments d  on e.departmentid=d.departmentid  where

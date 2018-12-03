@@ -1,0 +1,40 @@
+package com.chazhangxinyuan.jdk8;
+
+import java.util.concurrent.RecursiveTask;
+
+/**
+ * @author zhangjun
+ * @create 2018/11/29/12:17
+ */
+public class AccumulatorRecursiveTask extends RecursiveTask<Integer> {
+
+    private final int start;
+    private final int end;
+    private final int[] data;
+    private final int limit=3;
+
+    public AccumulatorRecursiveTask(int start, int end, int[] data) {
+        this.start = start;
+        this.end = end;
+        this.data = data;
+    }
+
+    @Override
+    protected Integer compute() {
+        if(end-start<=limit){
+            int result=0;
+            for (int i=start;i<end;i++){
+                result+=data[i];
+            }
+            return result;
+        }
+
+        int mid=(end+start)/2;
+        AccumulatorRecursiveTask left = new AccumulatorRecursiveTask(start,mid,data);
+        AccumulatorRecursiveTask right = new AccumulatorRecursiveTask(mid,end,data);
+        left.fork();
+        Integer leftResult = left.join();
+        Integer rightResult = right.compute();
+        return leftResult+rightResult;
+    }
+}

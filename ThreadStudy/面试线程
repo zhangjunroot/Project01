@@ -1,0 +1,7 @@
+1.新启一个线程有几种方式
+三种 extends Thread    impl Runnable(Thread)    impl Callable(有返回值)(FutureTask|Thread)
+2.怎样让Java中的线程安全停止工作
+interrupt() 把中断的标志位置为true
+isInterrupted()默认为false
+
+
